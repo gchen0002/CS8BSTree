@@ -53,6 +53,24 @@ void BSTree<T>::postorder(Node<T> *node, int(*f)(T &data))
 }
 
 template<typename T>
+void BSTree<T>::remove(Node<T>*& node, const T& data){
+    if(!node) return;
+    if(isLeaf(node)){
+        delete node;
+        return;
+    }
+    else if(hasOneChild(node)){
+        node = getOneChild(node);
+    }
+    else if(hasChildren(node)){
+        Node *& n = getNextSuccessor(node);
+        swap(n->data, node->data);
+        remove(n, n->data);
+    }
+}
+
+// PUBLIC
+template<typename T>
 void BSTree<T>::push(const T &data)
 {
     push(root, data);

@@ -10,5 +10,9 @@ int main() {
     tree.push(5);
     tree.push(15);
     tree.inorder(&print);
+    std::cout << std::endl;
+    tree.preorder(&print);
+    std::cout << std::endl;
+    tree.postorder(&print);
     return 0;
 }
