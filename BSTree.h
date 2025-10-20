@@ -6,8 +6,8 @@
 template<typename T>
 class BSTree
 {
+protected:
     Node<T>* root = nullptr;
-
     void push(Node<T>* &node, const T& data);
     void inorder(Node<T>* node, int (*f)(T& data));
     void preorder(Node<T>* node, int (*f)(T& data));
