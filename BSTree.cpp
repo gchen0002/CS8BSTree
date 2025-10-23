@@ -105,7 +105,20 @@ void BSTree<T>::remove(Node<T>*& node, const T& data) {
     }
 }
 
+
 // PUBLIC
+template <typename T>
+BSTree<T>::BSTree(){
+    // default constructor
+}
+
+// template <typename T>
+// BSTree<T>::BSTree(const& BSTree<T> other){
+
+
+//     return;
+// }
+
 template<typename T>
 void BSTree<T>::push(const T &data)
 {
@@ -136,4 +149,17 @@ void BSTree<T>::remove(const T& data)
     remove(root, data);
 }
 
+template <typename T>
+void BSTree<T>::BFS(void (*f)(T& data)){
+    if(!root) return;
+    std::queue<Node<T>*> q;
+    q.push(root);
+    while(!q.empty()){
+        Node<T>* curr = q.front();
+        if(curr->left) q.push(curr->left);
+        if(curr->right) q.push(curr->right);
+        f(curr->data);
+        q.pop();
+    }
+}
 #endif

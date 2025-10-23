@@ -2,7 +2,7 @@
 #define BSTREE_H
 
 #include "Node.h"
-
+#include <queue>
 template<typename T>
 class BSTree
 {
@@ -21,12 +21,17 @@ protected:
     Node<T>* getOneChild(Node<T>* node);
     Node<T>*& getSuccessor(Node<T>* node);
 public:
+    BSTree();
+    // big 3
+    // ~BSTree();
+    // BSTree(const& BSTree<T> other);
+    // BSTree<T> operator=(const& BSTree<T> other);
     void push(const T& data);
     void remove(const T& data);
     void inorder(int (*f)(T& data));
     void preorder(int (*f)(T& data));
     void postorder(int (*f)(T& data));
-
+    void BFS(void (*f)(T& data));
 };
 
 #include "BSTree.cpp"
