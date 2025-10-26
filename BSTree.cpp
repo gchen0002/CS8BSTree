@@ -69,16 +69,26 @@ bool BSTree<T>::hasTwoChildren(Node<T>* node) const {
 
 template<typename T>
 Node<T>* BSTree<T>::getOneChild(Node<T>* node) {
-    return (node->left) ? node->left : node->right;
+    if(node->left){
+        return node->left;
+    } else {
+        return node->right;
+    }
 }
 
 template<typename T>
 Node<T>*& BSTree<T>::getSuccessor(Node<T>* node) {
     Node<T>* current = node->right;
-    while (current && current->left) {
+    
+    if (!current->left) {
+        return node->right;
+    }
+    
+    while (current->left->left) {
         current = current->left;
     }
-    return current;
+    
+    return current->left;
 }
 
 template<typename T>
@@ -105,6 +115,17 @@ void BSTree<T>::remove(Node<T>*& node, const T& data) {
     }
 }
 
+// helper for remove and destructor
+template <typename T>
+void BSTree<T>::deleteSubtree(Node<T>*& node){
+    if(node == nullptr) {
+        return;
+    }
+    deleteSubtree(node->left);
+    deleteSubtree(node->right);
+    delete node;
+    node = nullptr;
+}
 
 // PUBLIC
 template <typename T>
@@ -112,12 +133,43 @@ BSTree<T>::BSTree(){
     // default constructor
 }
 
-// template <typename T>
-// BSTree<T>::BSTree(const& BSTree<T> other){
+template <typename T>
+BSTree<T>::BSTree(const BSTree<T>& other){
+    // copy constructor
+    copyTree(root, other.root);
+}
+
+template <typename T>
+BSTree<T> BSTree<T>::operator=(const BSTree<T>& other){
+    // copy assignment operator if it is different
+    if(this != &other){
+        copyTree(root, other.root);
+    }
+    return *this;
+}
+
+template <typename T>
+void BSTree<T>::copyTree(Node<T>*& thisNode, Node<T>* otherNode){
+    if(!otherNode){
+        thisNode = nullptr;
+        return;
+    }
+    thisNode = new Node<T>(otherNode->data);
+    copyTree(thisNode->left, otherNode->left);
+    copyTree(thisNode->right, otherNode->right);
+}
+template <typename T>
+BSTree<T>::~BSTree(){
+    // destructor
+    clear();
+}
+
+template <typename T>
+void BSTree<T>::clear(){
+    deleteSubtree(root);
+}
 
 
-//     return;
-// }
 
 template<typename T>
 void BSTree<T>::push(const T &data)

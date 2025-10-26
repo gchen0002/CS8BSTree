@@ -9,31 +9,25 @@ void printV(int &data) {
     std::cout << data << " ";
 }
 int main() {
-    // BSTree<int> tree;
-    // tree.push(10);
-    // tree.push(5);
-    // tree.push(15);
-    // tree.inorder(&print);
-    // std::cout << std::endl;
-    // tree.preorder(&print);
-    // std::cout << std::endl;
-    // tree.postorder(&print);
-
-    AVLTree<int> avlTree;
-    avlTree.push(21);
-    avlTree.push(86);
-    avlTree.push(12);
-    avlTree.push(4);
-    avlTree.push(-1);
-    avlTree.push(5);
-    avlTree.push(19);
-    // avlTree.inorder(&print);
-    // std::cout << std::endl;
-    // avlTree.preorder(&print);
-    // std::cout << std::endl;
-    avlTree.postorder(&print);
+    BSTree<int> tree;
+    tree.push(10);
+    tree.push(5);
+    tree.push(15);
+    tree.push(3);
+    tree.push(7);
+    tree.push(1200);
+    tree.push(-1111);
+    tree.inorder(&print);
     std::cout << std::endl;
-    avlTree.BFS(&printV);
+    tree.preorder(&print);
     std::cout << std::endl;
-    return 0;
+    tree.postorder(&print);
+    std::cout << std::endl;
+    std::cout << "testing remove and clear" << std::endl;
+    tree.remove(5);
+    tree.inorder(&print);
+    std::cout << std::endl;
+    tree.clear();
+    tree.inorder(&print);
+    std::cout << std::endl;
 }

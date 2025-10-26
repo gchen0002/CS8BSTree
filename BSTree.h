@@ -20,12 +20,18 @@ protected:
     bool hasTwoChildren(Node<T>* node) const;
     Node<T>* getOneChild(Node<T>* node);
     Node<T>*& getSuccessor(Node<T>* node);
+    
+    void copyTree(Node<T>*& thisNode, Node<T>* otherNode);
+    void deleteSubtree(Node<T>*& node);
 public:
     BSTree();
     // big 3
-    // ~BSTree();
-    // BSTree(const& BSTree<T> other);
-    // BSTree<T> operator=(const& BSTree<T> other);
+    ~BSTree();
+    BSTree(const BSTree<T>& other);
+    BSTree<T> operator=(const BSTree<T>& other);
+
+    
+    void clear();
     void push(const T& data);
     void remove(const T& data);
     void inorder(int (*f)(T& data));
