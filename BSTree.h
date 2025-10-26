@@ -24,6 +24,10 @@ protected:
     void copyTree(Node<T>*& thisNode, Node<T>* otherNode);
     void deleteSubtree(Node<T>*& node);
 public:
+    enum Traversal { PREORDER, INORDER, POSTORDER, BREADTHFIRST };
+
+    // traversal by enum
+    void traverse(Traversal t, int (*f)(T& data));
     BSTree();
     // big 3
     ~BSTree();
@@ -37,7 +41,7 @@ public:
     void inorder(int (*f)(T& data));
     void preorder(int (*f)(T& data));
     void postorder(int (*f)(T& data));
-    void BFS(void (*f)(T& data));
+    void BFS(int (*f)(T& data));
 };
 
 #include "BSTree.cpp"

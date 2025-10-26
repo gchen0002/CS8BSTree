@@ -3,6 +3,8 @@
 #ifndef AVLTree_CPP
 #define AVLTree_CPP
 
+
+
 template <typename T>
 int AVLTree<T>::getHeight(Node<T>* node) const{
     if(!node){
@@ -52,6 +54,49 @@ void AVLTree<T>::balance(Node<T>*& node){
         }
         rotateLeft(node);
     }
+}
+// PUBLIC METHODS
+// big 3
+template <typename T>
+AVLTree<T>::AVLTree() :BSTree<T>(){
+    // default constructor
+}
+
+template <typename T>
+AVLTree<T>::~AVLTree(){
+    // destructor
+    this->clear();
+}
+
+template <typename T>
+AVLTree<T>::AVLTree(const AVLTree<T>& other) : BSTree<T>(other){
+    // copy constructor
+}
+
+template<typename T>
+AVLTree<T> AVLTree<T>::operator=(const AVLTree<T>& other){
+    // copy assignment operator
+    if(this != &other){
+        // use bstree assignment operator
+        BSTree<T>::operator=(other);
+    }
+    return *this;
+}
+
+template <typename T>
+void AVLTree<T>::copyTree(Node<T>*& thisNode, Node<T>* otherNode){
+    BSTree<T>::copyTree(thisNode, otherNode);
+}
+
+template <typename T>
+void AVLTree<T>::remove(const T& data){
+    BSTree<T>::remove(this->root, data);
+    balance(this->root);
+}
+
+template <typename T>
+void AVLTree<T>::clear(){
+    BSTree<T>::clear();
 }
 
 template <typename T>

@@ -201,8 +201,30 @@ void BSTree<T>::remove(const T& data)
     remove(root, data);
 }
 
+// traversal by enum
+template<typename T>
+void BSTree<T>::traverse(typename BSTree<T>::Traversal t, int (*f)(T& data)){
+    switch(t){
+        case BSTree<T>::PREORDER:
+            preorder(root, f);
+            break;
+        case BSTree<T>::INORDER:
+            inorder(root, f);
+            break;
+        case BSTree<T>::POSTORDER:
+            postorder(root, f);
+            break;
+        case BSTree<T>::BREADTHFIRST:
+            BFS(f);
+            break;
+        default:
+            inorder(root, f);
+            break;
+    }
+}
+
 template <typename T>
-void BSTree<T>::BFS(void (*f)(T& data)){
+void BSTree<T>::BFS(int (*f)(T& data)){
     if(!root) return;
     std::queue<Node<T>*> q;
     q.push(root);
